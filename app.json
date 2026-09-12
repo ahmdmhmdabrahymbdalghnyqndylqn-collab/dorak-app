@@ -1,21 +1,21 @@
 {
   "expo": {
-    "name": "دَوْرَك - المالك",
-    "slug": "dorak-owner-admin",
-    "version": "1.0.0",
+    "name": "دَوْرَك",
+    "slug": "dorak-guard-app",
+    "version": "1.1.0",
     "orientation": "portrait",
     "userInterfaceStyle": "light",
     "icon": "./assets/icon.png",
     "android": {
-      "package": "jo.dorak.owner",
-      "versionCode": 1,
+      "package": "jo.dorak.guard",
+      "versionCode": 2,
       "adaptiveIcon": {
         "foregroundImage": "./assets/adaptive-icon.png",
         "backgroundColor": "#0F4C5C"
       }
     },
     "ios": {
-      "bundleIdentifier": "jo.dorak.owner",
+      "bundleIdentifier": "jo.dorak.guard",
       "supportsTablet": true
     },
     "extra": {
