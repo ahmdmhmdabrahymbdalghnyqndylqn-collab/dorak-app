@@ -1,0 +1,26 @@
+{
+  "expo": {
+    "name": "دَوْرَك - المالك",
+    "slug": "dorak-owner-admin",
+    "version": "1.0.0",
+    "orientation": "portrait",
+    "userInterfaceStyle": "light",
+    "icon": "./assets/icon.png",
+    "android": {
+      "package": "jo.dorak.owner",
+      "versionCode": 1,
+      "adaptiveIcon": {
+        "foregroundImage": "./assets/adaptive-icon.png",
+        "backgroundColor": "#0F4C5C"
+      }
+    },
+    "ios": {
+      "bundleIdentifier": "jo.dorak.owner",
+      "supportsTablet": true
+    },
+    "extra": {
+      "supportsRtl": true
+    },
+    "plugins": []
+  }
+}
