@@ -34,26 +34,33 @@ jobs:
       - name: Generate Android project
         run: npx expo prebuild --platform android --non-interactive
 
-      - name: Build installable APK
+      - name: Build standalone release APK
+        env:
+          NODE_ENV: production
         run: |
           cd android
           chmod +x gradlew
-          ./gradlew assembleDebug --no-daemon
+          ./gradlew assembleRelease --no-daemon
+
+      - name: Verify embedded JavaScript bundle
+        run: |
+          test -f android/app/build/generated/assets/createBundleReleaseJsAndAssets/index.android.bundle
+          test -f android/app/build/outputs/apk/release/app-release.apk
 
       - name: Prepare download file
-        run: cp android/app/build/outputs/apk/debug/app-debug.apk Dorak-Test.apk
+        run: cp android/app/build/outputs/apk/release/app-release.apk Dorak-Standalone.apk
 
       - name: Upload build artifact
         uses: actions/upload-artifact@v4
         with:
-          name: Dorak-Test-APK
-          path: Dorak-Test.apk
+          name: Dorak-Standalone-APK
+          path: Dorak-Standalone.apk
           retention-days: 30
 
       - name: Publish public test release
         env:
           GH_TOKEN: ${{ github.token }}
         run: |
-          gh release create "test-${GITHUB_RUN_NUMBER}" Dorak-Test.apk \
-            --title "دَوْرَك - نسخة تجريبية ${GITHUB_RUN_NUMBER}" \
-            --notes "نسخة تجريبية قابلة للتثبيت على أجهزة Android."
+          gh release create "standalone-${GITHUB_RUN_NUMBER}" Dorak-Standalone.apk \
+            --title "دَوْرَك - نسخة مستقلة ${GITHUB_RUN_NUMBER}" \
+            --notes "نسخة Android مستقلة تحتوي على كود التطبيق بالكامل ولا تحتاج Metro أو اتصالاً بالكمبيوتر."
