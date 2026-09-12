@@ -1,4 +1,4 @@
-name: Build Dorak APK
+name: Build Dorak Guard APK
 
 on:
   push:
@@ -48,19 +48,19 @@ jobs:
           test -f android/app/build/outputs/apk/release/app-release.apk
 
       - name: Prepare download file
-        run: cp android/app/build/outputs/apk/release/app-release.apk Dorak-Standalone.apk
+        run: cp android/app/build/outputs/apk/release/app-release.apk Dorak-Guard.apk
 
       - name: Upload build artifact
         uses: actions/upload-artifact@v4
         with:
-          name: Dorak-Standalone-APK
-          path: Dorak-Standalone.apk
+          name: Dorak-Guard-APK
+          path: Dorak-Guard.apk
           retention-days: 30
 
       - name: Publish public test release
         env:
           GH_TOKEN: ${{ github.token }}
         run: |
-          gh release create "standalone-${GITHUB_RUN_NUMBER}" Dorak-Standalone.apk \
-            --title "دَوْرَك - نسخة مستقلة ${GITHUB_RUN_NUMBER}" \
-            --notes "نسخة Android مستقلة تحتوي على كود التطبيق بالكامل ولا تحتاج Metro أو اتصالاً بالكمبيوتر."
+          gh release create "guard-${GITHUB_RUN_NUMBER}" Dorak-Guard.apk \
+            --title "دَوْرَك - تطبيق الحارس ${GITHUB_RUN_NUMBER}" \
+            --notes "تطبيق الحارس التجريبي لنظام دَوْرَك. نسخة Android مستقلة لا تحتاج Metro أو اتصالاً بالكمبيوتر."
